@@ -86,7 +86,7 @@ public class NetworkResultCallTest {
                                 }
                             }
                         ),
-                        response.body(),
+                        response.body()
                     )
                 }
 

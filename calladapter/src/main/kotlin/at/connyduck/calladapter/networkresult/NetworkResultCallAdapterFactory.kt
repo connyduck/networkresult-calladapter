@@ -29,7 +29,6 @@ public class NetworkResultCallAdapterFactory internal constructor() : CallAdapte
         annotations: Array<Annotation>,
         retrofit: Retrofit
     ): CallAdapter<*, *>? {
-
         val rawReturnType = getRawType(returnType)
         // suspend functions wrap the response type in `Call`
         if (Call::class.java != rawReturnType && NetworkResult::class.java != rawReturnType) {

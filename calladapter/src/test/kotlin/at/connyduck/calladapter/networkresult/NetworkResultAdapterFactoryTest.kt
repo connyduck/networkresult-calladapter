@@ -45,7 +45,6 @@ public class NetworkResultAdapterFactoryTest {
 
     @Test
     public fun `should return null if the type is not supported`() {
-
         val adapter = NetworkResultCallAdapterFactory().get(TestResponseClass::class.java, arrayOf(), retrofit)
 
         assertNull(adapter)
