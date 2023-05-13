@@ -33,7 +33,7 @@ Define the call like this in your Retrofit interface:
 
 ```Kotlin
 @GET("api/v1/example/{id}")
-suspend fun getData(id:String): NetworkResult<Example>
+suspend fun getData(id: String): NetworkResult<Example>
 ```
 
 And then make the call like this
@@ -56,8 +56,9 @@ api.getData("1").fold(
 For blocking calls, omit the `suspend`
 
 ```Kotlin
+// don't call this from the main thread
 @GET("api/v1/example/{id}")
-fun getData(id:String): NetworkResult<Example>
+fun getData(id: String): NetworkResult<Example>
 ```
 
 ## License
