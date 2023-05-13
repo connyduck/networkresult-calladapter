@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test
 import retrofit2.Call
 import retrofit2.Retrofit
 
-public class NetworkResultAdapterFactoryTest {
+class NetworkResultAdapterFactoryTest {
 
     private val retrofit = Retrofit.Builder().baseUrl("http://example.com").build()
 
     @Test
-    public fun `should return a NetworkResultCallAdapter`() {
+    fun `should return a NetworkResultCallAdapter`() {
         val responseType =
             Types.newParameterizedType(NetworkResult::class.java, TestResponseClass::class.java)
         val callType = Types.newParameterizedType(Call::class.java, responseType)
@@ -26,7 +26,7 @@ public class NetworkResultAdapterFactoryTest {
     }
 
     @Test
-    public fun `should return a SyncNetworkResultCallAdapter`() {
+    fun `should return a SyncNetworkResultCallAdapter`() {
         val responseType =
             Types.newParameterizedType(NetworkResult::class.java, TestResponseClass::class.java)
 
@@ -37,14 +37,14 @@ public class NetworkResultAdapterFactoryTest {
     }
 
     @Test
-    public fun `should throw error if the type is not parameterized`() {
+    fun `should throw error if the type is not parameterized`() {
         assertThrows(
             IllegalStateException::class.java
         ) { NetworkResultCallAdapterFactory().get(NetworkResult::class.java, arrayOf(), retrofit) }
     }
 
     @Test
-    public fun `should return null if the type is not supported`() {
+    fun `should return null if the type is not supported`() {
         val adapter = NetworkResultCallAdapterFactory().get(TestResponseClass::class.java, arrayOf(), retrofit)
 
         assertNull(adapter)

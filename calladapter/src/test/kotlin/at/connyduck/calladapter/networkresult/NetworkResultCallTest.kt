@@ -1,7 +1,7 @@
 package at.connyduck.calladapter.networkresult
 
 import okhttp3.ResponseBody.Companion.toResponseBody
-import org.junit.Assert.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -11,20 +11,20 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 
-public class NetworkResultCallTest {
+class NetworkResultCallTest {
 
     private val backingCall = TestCall<String>()
     private val networkNetworkResultCall = NetworkResultCall(backingCall)
 
     @Test
-    public fun `should throw an error when invoking 'execute'`() {
+    fun `should throw an error when invoking 'execute'`() {
         assertThrows<UnsupportedOperationException> {
             networkNetworkResultCall.execute()
         }
     }
 
     @Test
-    public fun `should delegate properties to backing call`() {
+    fun `should delegate properties to backing call`() {
         with(networkNetworkResultCall) {
             assertEquals(isExecuted, backingCall.isExecuted)
             assertEquals(isCanceled, backingCall.isCanceled)
@@ -33,19 +33,19 @@ public class NetworkResultCallTest {
     }
 
     @Test
-    public fun `should return new instance when cloned`() {
+    fun `should return new instance when cloned`() {
         val clonedCall = networkNetworkResultCall.clone()
         assert(clonedCall !== networkNetworkResultCall)
     }
 
     @Test
-    public fun `should cancel backing call as well when cancelled`() {
+    fun `should cancel backing call as well when cancelled`() {
         networkNetworkResultCall.cancel()
         assert(backingCall.isCanceled)
     }
 
     @Test
-    public fun `should parse successful call as NetworkResult-success`() {
+    fun `should parse successful call as NetworkResult-success`() {
         val body = "Test body"
         networkNetworkResultCall.enqueue(
             object : Callback<NetworkResult<String>> {
@@ -69,7 +69,7 @@ public class NetworkResultCallTest {
     }
 
     @Test
-    public fun `should parse call with 404 error code as NetworkResult-failure`() {
+    fun `should parse call with 404 error code as NetworkResult-failure`() {
         val errorCode = 404
         val errorBody = "not found"
         networkNetworkResultCall.enqueue(
@@ -100,7 +100,7 @@ public class NetworkResultCallTest {
     }
 
     @Test
-    public fun `should parse call with IOException as NetworkResult-failure`() {
+    fun `should parse call with IOException as NetworkResult-failure`() {
         val exception = IOException()
         networkNetworkResultCall.enqueue(
             object : Callback<NetworkResult<String>> {

@@ -16,14 +16,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.IOException
 
-public class ApiTest {
+class ApiTest {
 
     private var mockWebServer = MockWebServer()
 
     private lateinit var api: TestApi
 
     @BeforeEach
-    public fun setup() {
+    fun setup() {
         mockWebServer.start()
 
         val moshi = Moshi.Builder()
@@ -40,7 +40,7 @@ public class ApiTest {
     }
 
     @AfterEach
-    public fun shutdown() {
+    fun shutdown() {
         mockWebServer.shutdown()
     }
 
@@ -49,7 +49,7 @@ public class ApiTest {
         .setBody(body)
 
     @Test
-    public fun `suspending call - should return the correct test object`() {
+    fun `suspending call - should return the correct test object`() {
         val response = mockResponse(
             200,
             """
@@ -73,7 +73,7 @@ public class ApiTest {
     }
 
     @Test
-    public fun `blocking call - should return the correct test object`() {
+    fun `blocking call - should return the correct test object`() {
         val response = mockResponse(
             200,
             """
@@ -95,7 +95,7 @@ public class ApiTest {
     }
 
     @Test
-    public fun `suspending call - should return a ApiError failure when the server returns error 500`() {
+    fun `suspending call - should return a ApiError failure when the server returns error 500`() {
         val errorCode = 500
         val response = mockResponse(errorCode)
 
@@ -110,7 +110,7 @@ public class ApiTest {
     }
 
     @Test
-    public fun `blocking call - should return a ApiError failure when the server returns error 500`() {
+    fun `blocking call - should return a ApiError failure when the server returns error 500`() {
         val errorCode = 500
         val response = mockResponse(errorCode)
 
@@ -123,7 +123,7 @@ public class ApiTest {
     }
 
     @Test
-    public fun `suspending call - should return a NetworkError failure when the network fails`() {
+    fun `suspending call - should return a NetworkError failure when the network fails`() {
         mockWebServer.enqueue(MockResponse().apply { socketPolicy = SocketPolicy.DISCONNECT_AFTER_REQUEST })
         val responseObject = runBlocking {
             api.testEndpointAsync()
@@ -142,7 +142,7 @@ public class ApiTest {
     }
 
     @Test
-    public fun `blocking call - should return a NetworkError failure when the network fails`() {
+    fun `blocking call - should return a NetworkError failure when the network fails`() {
         mockWebServer.enqueue(MockResponse().apply { socketPolicy = SocketPolicy.DISCONNECT_AFTER_REQUEST })
         val responseObject = api.testEndpointSync()
 

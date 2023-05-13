@@ -7,21 +7,21 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InterruptedIOException
 
-public class TestCall<T> : Call<T> {
+class TestCall<T> : Call<T> {
     private var executed = false
     private var canceled = false
     private var callback: Callback<T>? = null
     private var request = Request.Builder().url("http://example.com").build()
 
-    public fun completeWithException(t: Throwable) {
+    fun completeWithException(t: Throwable) {
         synchronized(this) {
             callback?.onFailure(this, t)
         }
     }
 
-    public fun complete(body: T): Unit = complete(Response.success(body))
+    fun complete(body: T): Unit = complete(Response.success(body))
 
-    public fun complete(response: Response<T>) {
+    fun complete(response: Response<T>) {
         synchronized(this) {
             callback?.onResponse(this, response)
         }
@@ -33,9 +33,9 @@ public class TestCall<T> : Call<T> {
         }
     }
 
-    public override fun isExecuted(): Boolean = synchronized(this) { executed }
-    public override fun isCanceled(): Boolean = synchronized(this) { canceled }
-    public override fun clone(): TestCall<T> = TestCall()
+    override fun isExecuted(): Boolean = synchronized(this) { executed }
+    override fun isCanceled(): Boolean = synchronized(this) { canceled }
+    override fun clone(): TestCall<T> = TestCall()
 
     override fun cancel() {
         synchronized(this) {
@@ -51,6 +51,6 @@ public class TestCall<T> : Call<T> {
         throw UnsupportedOperationException("Network call does not support synchronous execution")
     }
 
-    public override fun request(): Request = request
-    public override fun timeout(): Timeout = Timeout()
+    override fun request(): Request = request
+    override fun timeout(): Timeout = Timeout()
 }
