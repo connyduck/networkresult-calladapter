@@ -79,7 +79,7 @@ class NetworkResultCallTest {
                     response: Response<NetworkResult<String>>
                 ) {
                     assertEquals(
-                        NetworkResult.failure<TestResponseClass>(
+                        NetworkResult.failure<String>(
                             object : HttpException(Response.error<String>(errorCode, errorBody.toResponseBody())) {
                                 override fun equals(other: Any?): Boolean {
                                     return (other is HttpException) && other.code() == code() && other.message() == message()

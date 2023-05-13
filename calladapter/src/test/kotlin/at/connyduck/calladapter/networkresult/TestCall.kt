@@ -48,7 +48,7 @@ class TestCall<T> : Call<T> {
     }
 
     override fun execute(): Response<T> {
-        throw UnsupportedOperationException("Network call does not support synchronous execution")
+        throw UnsupportedOperationException("TestCall does not support synchronous execution")
     }
 
     override fun request(): Request = request
