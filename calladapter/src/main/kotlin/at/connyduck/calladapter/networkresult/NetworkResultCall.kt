@@ -76,7 +76,7 @@ internal class NetworkResultCall<S : Any>(
     override fun cancel() = delegate.cancel()
 
     override fun execute(): Response<NetworkResult<S>> {
-        throw UnsupportedOperationException("KotlinResultCall doesn't support synchronized execution")
+        throw UnsupportedOperationException("NetworkResultCall doesn't support synchronized execution")
     }
 
     override fun request(): Request = delegate.request()
