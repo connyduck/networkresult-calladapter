@@ -4,7 +4,7 @@
  *
  */
 
-@file:Suppress("UNCHECKED_CAST", "RedundantVisibilityModifier")
+@file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 
 package at.connyduck.calladapter.networkresult
 
