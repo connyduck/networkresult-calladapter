@@ -77,14 +77,14 @@ tasks.test {
 }
 
 dependencies {
-    val okHttpVersion = "4.9.3"
+    val okHttpVersion = "4.10.0"
     val retrofitVersion = "2.9.0"
-    val jUnitVersion = "5.8.2"
-    val moshiVersion = "1.13.0"
+    val jUnitVersion = "5.9.3"
+    val moshiVersion = "1.15.0"
 
     api(kotlin("stdlib"))
 
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.2")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.1")
 
     api("com.squareup.okhttp3:okhttp:$okHttpVersion")
 
