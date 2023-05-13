@@ -69,12 +69,9 @@ signing {
     sign(publishing.publications)
 }
 
-val compileKotlin: KotlinCompile by tasks
-
-compileKotlin.kotlinOptions.jvmTarget = "1.8"
-
 kotlin {
     explicitApi()
+    jvmToolchain(8)
 }
 
 tasks.test {
