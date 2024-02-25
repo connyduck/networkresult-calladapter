@@ -84,7 +84,7 @@ dependencies {
 
     api(kotlin("stdlib"))
 
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.1")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0")
 
     api("com.squareup.okhttp3:okhttp:$okHttpVersion")
 
