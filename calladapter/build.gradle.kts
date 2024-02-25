@@ -80,7 +80,7 @@ dependencies {
     val okHttpVersion = "4.10.0"
     val retrofitVersion = "2.9.0"
     val jUnitVersion = "5.9.3"
-    val moshiVersion = "1.15.0"
+    val moshiVersion = "1.15.1"
 
     api(kotlin("stdlib"))
 
