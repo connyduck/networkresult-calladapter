@@ -17,7 +17,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.IOException
 
 class ApiTest {
-
     private var mockWebServer = MockWebServer()
 
     private lateinit var api: TestApi
@@ -26,17 +25,19 @@ class ApiTest {
     fun setup() {
         mockWebServer.start()
 
-        val moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
+        val moshi =
+            Moshi.Builder()
+                .add(KotlinJsonAdapterFactory())
+                .build()
 
-        api = Retrofit.Builder()
-            .baseUrl(mockWebServer.url("/"))
-            .addCallAdapterFactory(NetworkResultCallAdapterFactory())
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .client(OkHttpClient())
-            .build()
-            .create(TestApi::class.java)
+        api =
+            Retrofit.Builder()
+                .baseUrl(mockWebServer.url("/"))
+                .addCallAdapterFactory(NetworkResultCallAdapterFactory())
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .client(OkHttpClient())
+                .build()
+                .create(TestApi::class.java)
     }
 
     @AfterEach
@@ -44,45 +45,51 @@ class ApiTest {
         mockWebServer.shutdown()
     }
 
-    private fun mockResponse(responseCode: Int, body: String = "") = MockResponse()
+    private fun mockResponse(
+        responseCode: Int,
+        body: String = "",
+    ) = MockResponse()
         .setResponseCode(responseCode)
         .setBody(body)
 
     @Test
     fun `suspending call - should return the correct test object`() {
-        val response = mockResponse(
-            200,
-            """
+        val response =
+            mockResponse(
+                200,
+                """
                 {
                     "lets": "not",
                     "test": 1
                 }
-            """
-        )
+            """,
+            )
 
         mockWebServer.enqueue(response)
 
-        val responseObject = runBlocking {
-            api.testEndpointAsync()
-        }
+        val responseObject =
+            runBlocking {
+                api.testEndpointAsync()
+            }
 
         assertEquals(
             NetworkResult.success(TestResponseClass("not", 1)),
-            responseObject
+            responseObject,
         )
     }
 
     @Test
     fun `blocking call - should return the correct test object`() {
-        val response = mockResponse(
-            200,
-            """
+        val response =
+            mockResponse(
+                200,
+                """
                 {
                     "lets": "not",
                     "test": 1
                 }
-            """
-        )
+            """,
+            )
 
         mockWebServer.enqueue(response)
 
@@ -90,7 +97,7 @@ class ApiTest {
 
         assertEquals(
             NetworkResult.success(TestResponseClass("not", 1)),
-            responseObject
+            responseObject,
         )
     }
 
@@ -101,9 +108,10 @@ class ApiTest {
 
         mockWebServer.enqueue(response)
 
-        val responseObject = runBlocking {
-            api.testEndpointAsync()
-        }
+        val responseObject =
+            runBlocking {
+                api.testEndpointAsync()
+            }
 
         assertEquals(500, (responseObject.exceptionOrNull() as HttpException).code())
         assertEquals("Server Error", (responseObject.exceptionOrNull() as HttpException).message())
@@ -125,9 +133,10 @@ class ApiTest {
     @Test
     fun `suspending call - should return a NetworkError failure when the network fails`() {
         mockWebServer.enqueue(MockResponse().apply { socketPolicy = SocketPolicy.DISCONNECT_AFTER_REQUEST })
-        val responseObject = runBlocking {
-            api.testEndpointAsync()
-        }
+        val responseObject =
+            runBlocking {
+                api.testEndpointAsync()
+            }
 
         assertEquals(
             NetworkResult.failure<TestResponseClass>(
@@ -135,9 +144,9 @@ class ApiTest {
                     override fun equals(other: Any?): Boolean {
                         return (other is IOException)
                     }
-                }
+                },
             ),
-            responseObject
+            responseObject,
         )
     }
 
@@ -152,9 +161,9 @@ class ApiTest {
                     override fun equals(other: Any?): Boolean {
                         return (other is IOException)
                     }
-                }
+                },
             ),
-            responseObject
+            responseObject,
         )
     }
 }

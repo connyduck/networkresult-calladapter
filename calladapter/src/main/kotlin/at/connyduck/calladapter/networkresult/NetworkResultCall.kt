@@ -24,46 +24,51 @@ import retrofit2.HttpException
 import retrofit2.Response
 
 internal class NetworkResultCall<S : Any>(
-    private val delegate: Call<S>
+    private val delegate: Call<S>,
 ) : Call<NetworkResult<S>> {
-
     override fun enqueue(callback: Callback<NetworkResult<S>>) {
         return delegate.enqueue(
             object : Callback<S> {
-                override fun onResponse(call: Call<S>, response: Response<S>) {
+                override fun onResponse(
+                    call: Call<S>,
+                    response: Response<S>,
+                ) {
                     val body = response.body()
 
                     if (response.isSuccessful) {
                         if (body != null) {
                             callback.onResponse(
                                 this@NetworkResultCall,
-                                Response.success(NetworkResult.success(body))
+                                Response.success(NetworkResult.success(body)),
                             )
                         } else {
                             // Response is successful but the body is null
                             callback.onResponse(
                                 this@NetworkResultCall,
                                 Response.success(
-                                    NetworkResult.failure(HttpException(response))
-                                )
+                                    NetworkResult.failure(HttpException(response)),
+                                ),
                             )
                         }
                     } else {
                         callback.onResponse(
                             this@NetworkResultCall,
                             Response.success(
-                                NetworkResult.failure(HttpException(response))
-                            )
+                                NetworkResult.failure(HttpException(response)),
+                            ),
                         )
                     }
                 }
 
-                override fun onFailure(call: Call<S>, throwable: Throwable) {
+                override fun onFailure(
+                    call: Call<S>,
+                    throwable: Throwable,
+                ) {
                     val networkResponse = NetworkResult.failure<S>(throwable)
 
                     callback.onResponse(this@NetworkResultCall, Response.success(networkResponse))
                 }
-            }
+            },
         )
     }
 

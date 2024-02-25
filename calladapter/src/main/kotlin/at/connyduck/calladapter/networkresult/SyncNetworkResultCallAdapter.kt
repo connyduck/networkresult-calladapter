@@ -22,9 +22,8 @@ import retrofit2.HttpException
 import java.lang.reflect.Type
 
 internal class SyncNetworkResultCallAdapter<S : Any>(
-    private val successType: Type
+    private val successType: Type,
 ) : CallAdapter<S, NetworkResult<S>> {
-
     override fun responseType(): Type = successType
 
     override fun adapt(call: Call<S>): NetworkResult<S> {

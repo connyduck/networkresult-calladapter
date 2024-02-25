@@ -12,7 +12,6 @@ import retrofit2.Response
 import java.io.IOException
 
 class NetworkResultCallTest {
-
     private val backingCall = TestCall<String>()
     private val networkNetworkResultCall = NetworkResultCall(backingCall)
 
@@ -51,19 +50,22 @@ class NetworkResultCallTest {
             object : Callback<NetworkResult<String>> {
                 override fun onResponse(
                     call: Call<NetworkResult<String>>,
-                    response: Response<NetworkResult<String>>
+                    response: Response<NetworkResult<String>>,
                 ) {
                     assertTrue(response.isSuccessful)
                     assertEquals(
                         response.body(),
-                        NetworkResult.success(body)
+                        NetworkResult.success(body),
                     )
                 }
 
-                override fun onFailure(call: Call<NetworkResult<String>>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<NetworkResult<String>>,
+                    t: Throwable,
+                ) {
                     throw IllegalStateException()
                 }
-            }
+            },
         )
         backingCall.complete(body)
     }
@@ -76,7 +78,7 @@ class NetworkResultCallTest {
             object : Callback<NetworkResult<String>> {
                 override fun onResponse(
                     call: Call<NetworkResult<String>>,
-                    response: Response<NetworkResult<String>>
+                    response: Response<NetworkResult<String>>,
                 ) {
                     assertEquals(
                         NetworkResult.failure<String>(
@@ -84,16 +86,19 @@ class NetworkResultCallTest {
                                 override fun equals(other: Any?): Boolean {
                                     return (other is HttpException) && other.code() == code() && other.message() == message()
                                 }
-                            }
+                            },
                         ),
-                        response.body()
+                        response.body(),
                     )
                 }
 
-                override fun onFailure(call: Call<NetworkResult<String>>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<NetworkResult<String>>,
+                    t: Throwable,
+                ) {
                     throw IllegalStateException()
                 }
-            }
+            },
         )
 
         backingCall.complete(Response.error(errorCode, errorBody.toResponseBody()))
@@ -106,18 +111,21 @@ class NetworkResultCallTest {
             object : Callback<NetworkResult<String>> {
                 override fun onResponse(
                     call: Call<NetworkResult<String>>,
-                    response: Response<NetworkResult<String>>
+                    response: Response<NetworkResult<String>>,
                 ) {
                     assertEquals(
                         response.body(),
-                        NetworkResult.failure<String>(exception)
+                        NetworkResult.failure<String>(exception),
                     )
                 }
 
-                override fun onFailure(call: Call<NetworkResult<String>>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<NetworkResult<String>>,
+                    t: Throwable,
+                ) {
                     throw IllegalStateException()
                 }
-            }
+            },
         )
 
         backingCall.completeWithException(exception)

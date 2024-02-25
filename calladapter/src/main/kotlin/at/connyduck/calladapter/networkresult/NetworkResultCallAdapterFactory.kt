@@ -23,11 +23,10 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 public class NetworkResultCallAdapterFactory internal constructor() : CallAdapter.Factory() {
-
     override fun get(
         returnType: Type,
         annotations: Array<Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): CallAdapter<*, *>? {
         val rawReturnType = getRawType(returnType)
         // suspend functions wrap the response type in `Call`
@@ -37,7 +36,8 @@ public class NetworkResultCallAdapterFactory internal constructor() : CallAdapte
 
         // check first that the return type is `ParameterizedType`
         check(returnType is ParameterizedType) {
-            "return type must be parameterized as Call<NetworkResult<Foo>>, Call<NetworkResult<out Foo>>, NetworkResult<Foo> or NetworkResult<out Foo>"
+            "return type must be parameterized as Call<NetworkResult<Foo>>, Call<NetworkResult<out Foo>>, " +
+                "NetworkResult<Foo> or NetworkResult<out Foo>"
         }
 
         // get the response type inside the `Call` or `NetworkResult` type

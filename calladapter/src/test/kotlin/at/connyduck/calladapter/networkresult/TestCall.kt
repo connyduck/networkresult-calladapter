@@ -34,7 +34,9 @@ class TestCall<T> : Call<T> {
     }
 
     override fun isExecuted(): Boolean = synchronized(this) { executed }
+
     override fun isCanceled(): Boolean = synchronized(this) { canceled }
+
     override fun clone(): TestCall<T> = TestCall()
 
     override fun cancel() {
@@ -52,5 +54,6 @@ class TestCall<T> : Call<T> {
     }
 
     override fun request(): Request = request
+
     override fun timeout(): Timeout = Timeout()
 }

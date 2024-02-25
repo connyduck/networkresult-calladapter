@@ -10,7 +10,6 @@ import retrofit2.Call
 import retrofit2.Retrofit
 
 class NetworkResultAdapterFactoryTest {
-
     private val retrofit = Retrofit.Builder().baseUrl("http://example.com").build()
 
     @Test
@@ -39,7 +38,7 @@ class NetworkResultAdapterFactoryTest {
     @Test
     fun `should throw error if the type is not parameterized`() {
         assertThrows(
-            IllegalStateException::class.java
+            IllegalStateException::class.java,
         ) { NetworkResultCallAdapterFactory().get(NetworkResult::class.java, arrayOf(), retrofit) }
     }
 
