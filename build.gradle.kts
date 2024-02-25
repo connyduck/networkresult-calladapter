@@ -20,7 +20,7 @@ allprojects {
 }
 
 tasks.register("clean", Delete::class.java) {
-    delete(rootProject.buildDir)
+    delete(rootProject.layout.buildDirectory)
 }
 
 apply(from = "$rootDir/scripts/publish-root.gradle")
