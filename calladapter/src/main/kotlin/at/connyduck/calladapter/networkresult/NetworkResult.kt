@@ -8,6 +8,7 @@
 
 package at.connyduck.calladapter.networkresult
 
+import java.io.Serializable
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmName
 
@@ -18,7 +19,9 @@ import kotlin.jvm.JvmName
 public data class NetworkResult<out T> @PublishedApi internal constructor(
     @PublishedApi
     internal val value: Any?
-) {
+) : Serializable {
+    // discovery
+
     /**
      * Returns `true` if this instance represents a successful outcome.
      * In this case [isFailure] returns `false`.
@@ -96,7 +99,7 @@ public data class NetworkResult<out T> @PublishedApi internal constructor(
     internal class Failure(
         @JvmField
         val exception: Throwable
-    ) {
+    ) : Serializable {
         override fun equals(other: Any?): Boolean = other is Failure && exception == other.exception
         override fun hashCode(): Int = exception.hashCode()
         override fun toString(): String = "Failure($exception)"
