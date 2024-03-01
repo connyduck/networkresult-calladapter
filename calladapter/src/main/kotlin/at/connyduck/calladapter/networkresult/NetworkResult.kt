@@ -5,10 +5,14 @@
  */
 
 @file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+@file:OptIn(ExperimentalContracts::class)
 
 package at.connyduck.calladapter.networkresult
 
 import java.io.Serializable
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmName
 
@@ -171,6 +175,9 @@ public inline fun <T> NetworkResult<T>.getOrThrow(): T {
  * This function is a shorthand for `fold(onSuccess = { it }, onFailure = onFailure)` (see [fold]).
  */
 public inline fun <R, T : R> NetworkResult<T>.getOrElse(onFailure: (exception: Throwable) -> R): R {
+    contract {
+        callsInPlace(onFailure, InvocationKind.AT_MOST_ONCE)
+    }
     return when (val exception = exceptionOrNull()) {
         null -> value as T
         else -> onFailure(exception)
@@ -198,6 +205,10 @@ public inline fun <R, T> NetworkResult<T>.fold(
     onSuccess: (value: T) -> R,
     onFailure: (exception: Throwable) -> R,
 ): R {
+    contract {
+        callsInPlace(onSuccess, InvocationKind.AT_MOST_ONCE)
+        callsInPlace(onFailure, InvocationKind.AT_MOST_ONCE)
+    }
     return when (val exception = exceptionOrNull()) {
         null -> onSuccess(value as T)
         else -> onFailure(exception)
@@ -215,6 +226,9 @@ public inline fun <R, T> NetworkResult<T>.fold(
  * See [mapCatching] for an alternative that encapsulates exceptions.
  */
 public inline fun <R, T> NetworkResult<T>.map(transform: (value: T) -> R): NetworkResult<R> {
+    contract {
+        callsInPlace(transform, InvocationKind.AT_MOST_ONCE)
+    }
     return when {
         isSuccess -> NetworkResult.success(transform(value as T))
         else -> NetworkResult(value)
@@ -245,6 +259,9 @@ public inline fun <R, T> NetworkResult<T>.mapCatching(transform: (value: T) -> R
  * See [recoverCatching] for an alternative that encapsulates exceptions.
  */
 public inline fun <R, T : R> NetworkResult<T>.recover(transform: (exception: Throwable) -> R): NetworkResult<R> {
+    contract {
+        callsInPlace(transform, InvocationKind.AT_MOST_ONCE)
+    }
     return when (val exception = exceptionOrNull()) {
         null -> this
         else -> NetworkResult.success(transform(exception))
@@ -273,6 +290,9 @@ public inline fun <R, T : R> NetworkResult<T>.recoverCatching(transform: (except
  * Returns the original `Result` unchanged.
  */
 public inline fun <T> NetworkResult<T>.onFailure(action: (exception: Throwable) -> Unit): NetworkResult<T> {
+    contract {
+        callsInPlace(action, InvocationKind.AT_MOST_ONCE)
+    }
     exceptionOrNull()?.let { action(it) }
     return this
 }
@@ -282,6 +302,9 @@ public inline fun <T> NetworkResult<T>.onFailure(action: (exception: Throwable) 
  * Returns the original `Result` unchanged.
  */
 public inline fun <T> NetworkResult<T>.onSuccess(action: (value: T) -> Unit): NetworkResult<T> {
+    contract {
+        callsInPlace(action, InvocationKind.AT_MOST_ONCE)
+    }
     if (isSuccess) action(value as T)
     return this
 }
