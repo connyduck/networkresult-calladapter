@@ -1,3 +1,5 @@
+![CI](https://github.com/connyduck/networkresult-calladapter/actions/workflows/main.yml/badge.svg?branch=main)
+
 # NetworkResult CallAdapter for Retrofit
 
 A `CallAdapter` for [Retrofit](https://github.com/square/retrofit) that allows to handle network calls with suspending functions that return `NetworkResult`, a class similar to Kotlin's [`Result`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/).
