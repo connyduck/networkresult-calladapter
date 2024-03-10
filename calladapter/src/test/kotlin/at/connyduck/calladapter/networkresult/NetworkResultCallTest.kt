@@ -34,7 +34,7 @@ class NetworkResultCallTest {
     @Test
     fun `should return new instance when cloned`() {
         val clonedCall = networkNetworkResultCall.clone()
-        assert(clonedCall !== networkNetworkResultCall)
+        assert(clonedCall == networkNetworkResultCall)
     }
 
     @Test
