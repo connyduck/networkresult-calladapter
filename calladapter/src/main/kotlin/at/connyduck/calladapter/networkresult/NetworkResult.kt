@@ -18,10 +18,6 @@ import kotlin.jvm.JvmName
  */
 public data class NetworkResult<out T>
     @PublishedApi
-
-
-
-    
     internal constructor(
         @PublishedApi
         internal val value: Any?,
