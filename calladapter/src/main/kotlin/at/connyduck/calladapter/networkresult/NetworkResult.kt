@@ -98,6 +98,14 @@ public data class NetworkResult<out T>
             @Suppress("INAPPLICABLE_JVM_NAME")
             @JvmName("failure")
             public inline fun <T> failure(exception: Throwable): NetworkResult<T> = NetworkResult(createFailure(exception))
+
+            /**
+             * Converts this [NetworkResult] to a [Result] instance.
+             */
+            @JvmName("toResult")
+            public inline fun <T> NetworkResult<T>.toResult(): Result<T> {
+                return if (isSuccess) Result.success(value as T) else Result.failure(value as Throwable)
+            }
         }
 
         internal class Failure(
