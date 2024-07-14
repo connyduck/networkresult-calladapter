@@ -27,8 +27,5 @@ jobs:
             - name: Setup Gradle
               uses: gradle/actions/setup-gradle@v3
 
-            - name: ktlint
-              run: ./gradlew clean ktlintCheck
-
             - name: Build
               run: ./gradlew build

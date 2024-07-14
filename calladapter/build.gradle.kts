@@ -3,6 +3,7 @@ plugins {
     `maven-publish`
     signing
     id("org.jetbrains.dokka")
+    id("org.jetbrains.kotlinx.binary-compatibility-validator")
 }
 
 val sourcesJar by tasks.registering(Jar::class) {

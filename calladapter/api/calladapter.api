@@ -1,0 +1,47 @@
+public final class at/connyduck/calladapter/networkresult/NetworkResult : java/io/Serializable {
+	public static final field Companion Lat/connyduck/calladapter/networkresult/NetworkResult$Companion;
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun copy (Ljava/lang/Object;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public static synthetic fun copy$default (Lat/connyduck/calladapter/networkresult/NetworkResult;Ljava/lang/Object;ILjava/lang/Object;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun exceptionOrNull ()Ljava/lang/Throwable;
+	public final fun getOrNull ()Ljava/lang/Object;
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public final fun isFailure ()Z
+	public final fun isSuccess ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class at/connyduck/calladapter/networkresult/NetworkResult$Companion {
+	public final fun failure (Ljava/lang/Throwable;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public final fun success (Ljava/lang/Object;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+}
+
+public final class at/connyduck/calladapter/networkresult/NetworkResultCallAdapterFactory : retrofit2/CallAdapter$Factory {
+	public static final field Companion Lat/connyduck/calladapter/networkresult/NetworkResultCallAdapterFactory$Companion;
+	public static final fun create ()Lat/connyduck/calladapter/networkresult/NetworkResultCallAdapterFactory;
+	public fun get (Ljava/lang/reflect/Type;[Ljava/lang/annotation/Annotation;Lretrofit2/Retrofit;)Lretrofit2/CallAdapter;
+}
+
+public final class at/connyduck/calladapter/networkresult/NetworkResultCallAdapterFactory$Companion {
+	public final fun create ()Lat/connyduck/calladapter/networkresult/NetworkResultCallAdapterFactory;
+}
+
+public final class at/connyduck/calladapter/networkresult/NetworkResultKt {
+	public static final fun createFailure (Ljava/lang/Throwable;)Ljava/lang/Object;
+	public static final fun fold (Lat/connyduck/calladapter/networkresult/NetworkResult;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun getOrDefault (Lat/connyduck/calladapter/networkresult/NetworkResult;Ljava/lang/Object;)Ljava/lang/Object;
+	public static final fun getOrElse (Lat/connyduck/calladapter/networkresult/NetworkResult;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun getOrThrow (Lat/connyduck/calladapter/networkresult/NetworkResult;)Ljava/lang/Object;
+	public static final fun map (Lat/connyduck/calladapter/networkresult/NetworkResult;Lkotlin/jvm/functions/Function1;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public static final fun mapCatching (Lat/connyduck/calladapter/networkresult/NetworkResult;Lkotlin/jvm/functions/Function1;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public static final fun onFailure (Lat/connyduck/calladapter/networkresult/NetworkResult;Lkotlin/jvm/functions/Function1;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public static final fun onSuccess (Lat/connyduck/calladapter/networkresult/NetworkResult;Lkotlin/jvm/functions/Function1;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public static final fun recover (Lat/connyduck/calladapter/networkresult/NetworkResult;Lkotlin/jvm/functions/Function1;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public static final fun recoverCatching (Lat/connyduck/calladapter/networkresult/NetworkResult;Lkotlin/jvm/functions/Function1;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public static final fun runCatching (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public static final fun runCatching (Lkotlin/jvm/functions/Function0;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public static final fun throwOnFailure (Lat/connyduck/calladapter/networkresult/NetworkResult;)V
+}
+
