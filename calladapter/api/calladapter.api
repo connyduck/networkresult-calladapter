@@ -16,6 +16,7 @@ public final class at/connyduck/calladapter/networkresult/NetworkResult : java/i
 public final class at/connyduck/calladapter/networkresult/NetworkResult$Companion {
 	public final fun failure (Ljava/lang/Throwable;)Lat/connyduck/calladapter/networkresult/NetworkResult;
 	public final fun success (Ljava/lang/Object;)Lat/connyduck/calladapter/networkresult/NetworkResult;
+	public final fun toResult (Lat/connyduck/calladapter/networkresult/NetworkResult;)Ljava/lang/Object;
 }
 
 public final class at/connyduck/calladapter/networkresult/NetworkResultCallAdapterFactory : retrofit2/CallAdapter$Factory {
