@@ -20,7 +20,7 @@ import kotlin.jvm.JvmName
  * A discriminated union that encapsulates a successful outcome with a value of type [T]
  * or a failure with an arbitrary [Throwable] exception.
  */
-public data class NetworkResult<out T>
+public class NetworkResult<out T>
     @PublishedApi
     internal constructor(
         @PublishedApi
@@ -66,6 +66,10 @@ public data class NetworkResult<out T>
                 is Failure -> value.exception
                 else -> null
             }
+
+        override fun equals(other: Any?): Boolean = other is NetworkResult<*> && value == other.value
+
+        override fun hashCode(): Int = value.hashCode()
 
         /**
          * Returns a string `Success(v)` if this instance represents [success][Result.isSuccess]

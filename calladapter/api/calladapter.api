@@ -1,8 +1,6 @@
 public final class at/connyduck/calladapter/networkresult/NetworkResult : java/io/Serializable {
 	public static final field Companion Lat/connyduck/calladapter/networkresult/NetworkResult$Companion;
 	public fun <init> (Ljava/lang/Object;)V
-	public final fun copy (Ljava/lang/Object;)Lat/connyduck/calladapter/networkresult/NetworkResult;
-	public static synthetic fun copy$default (Lat/connyduck/calladapter/networkresult/NetworkResult;Ljava/lang/Object;ILjava/lang/Object;)Lat/connyduck/calladapter/networkresult/NetworkResult;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun exceptionOrNull ()Ljava/lang/Throwable;
 	public final fun getOrNull ()Ljava/lang/Object;
