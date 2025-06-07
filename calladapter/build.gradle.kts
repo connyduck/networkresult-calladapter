@@ -80,7 +80,7 @@ tasks.test {
 dependencies {
     val okHttpVersion = "4.12.0"
     val retrofitVersion = "2.11.0"
-    val jUnitVersion = "5.10.3"
+    val jUnitVersion = "5.13.1"
     val moshiVersion = "1.15.1"
 
     api(kotlin("stdlib"))
