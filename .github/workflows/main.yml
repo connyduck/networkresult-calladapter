@@ -27,5 +27,11 @@ jobs:
             - name: Setup Gradle
               uses: gradle/actions/setup-gradle@v4
 
+            - name: ktlint
+              run: ./gradlew clean ktlintCheck
+
+            - name: validate binary compatibility
+              run: ./gradlew apiCheck
+
             - name: Build
               run: ./gradlew build
