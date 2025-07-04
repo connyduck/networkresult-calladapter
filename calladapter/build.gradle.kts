@@ -78,7 +78,7 @@ tasks.test {
 }
 
 dependencies {
-    val okHttpVersion = "4.12.0"
+    val okHttpVersion = "5.0.0"
     val retrofitVersion = "3.0.0"
     val jUnitVersion = "5.13.2"
     val moshiVersion = "1.15.2"
@@ -91,7 +91,7 @@ dependencies {
 
     api("com.squareup.retrofit2:retrofit:$retrofitVersion")
 
-    testImplementation("com.squareup.okhttp3:mockwebserver:$okHttpVersion")
+    testImplementation("com.squareup.okhttp3:mockwebserver3:$okHttpVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
