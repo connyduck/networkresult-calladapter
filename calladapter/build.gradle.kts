@@ -12,9 +12,9 @@ val sourcesJar by tasks.registering(Jar::class) {
 }
 
 val javadocJar by tasks.registering(Jar::class) {
-    dependsOn(tasks.dokkaJavadoc)
+    dependsOn(tasks.dokkaGenerate)
     archiveClassifier.set("javadoc")
-    from(tasks.dokkaJavadoc.get().outputDirectory.get())
+    from(tasks.dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
 }
 
 afterEvaluate {

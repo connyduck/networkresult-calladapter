@@ -1,7 +1,6 @@
 /**
- * Non-inline version of kotlin.Result
+ * Non-inline version of [kotlin.Result]
  * inline classes don't work well in combination with Retrofit
- *
  */
 
 @file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
@@ -20,6 +19,7 @@ import kotlin.jvm.JvmName
  * A discriminated union that encapsulates a successful outcome with a value of type [T]
  * or a failure with an arbitrary [Throwable] exception.
  */
+@ExposedCopyVisibility
 public data class NetworkResult<out T>
     @PublishedApi
     internal constructor(
