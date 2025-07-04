@@ -79,13 +79,13 @@ tasks.test {
 
 dependencies {
     val okHttpVersion = "4.12.0"
-    val retrofitVersion = "2.11.0"
-    val jUnitVersion = "5.10.3"
-    val moshiVersion = "1.15.1"
+    val retrofitVersion = "3.0.0"
+    val jUnitVersion = "5.13.2"
+    val moshiVersion = "1.15.2"
 
     api(kotlin("stdlib"))
 
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.1")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2")
 
     api("com.squareup.okhttp3:okhttp:$okHttpVersion")
 
@@ -93,8 +93,9 @@ dependencies {
 
     testImplementation("com.squareup.okhttp3:mockwebserver:$okHttpVersion")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.13.2")
 
     testImplementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
     testImplementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
