@@ -34,7 +34,7 @@ class ApiTest {
         api =
             Retrofit.Builder()
                 .baseUrl(mockWebServer.url("/"))
-                .addCallAdapterFactory(NetworkResultCallAdapterFactory())
+                .addCallAdapterFactory(NetworkResultCallAdapterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .client(OkHttpClient())
                 .build()

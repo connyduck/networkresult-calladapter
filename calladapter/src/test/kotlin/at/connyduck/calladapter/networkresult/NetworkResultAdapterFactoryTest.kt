@@ -18,7 +18,7 @@ class NetworkResultAdapterFactoryTest {
             Types.newParameterizedType(NetworkResult::class.java, TestResponseClass::class.java)
         val callType = Types.newParameterizedType(Call::class.java, responseType)
 
-        val adapter = NetworkResultCallAdapterFactory().get(callType, arrayOf(), retrofit)
+        val adapter = NetworkResultCallAdapterFactory.create().get(callType, arrayOf(), retrofit)
 
         assertInstanceOf(NetworkResultCallAdapter::class.java, adapter)
         assertEquals(TestResponseClass::class.java, adapter?.responseType())
@@ -29,7 +29,7 @@ class NetworkResultAdapterFactoryTest {
         val responseType =
             Types.newParameterizedType(NetworkResult::class.java, TestResponseClass::class.java)
 
-        val adapter = NetworkResultCallAdapterFactory().get(responseType, arrayOf(), retrofit)
+        val adapter = NetworkResultCallAdapterFactory.create().get(responseType, arrayOf(), retrofit)
 
         assertInstanceOf(SyncNetworkResultCallAdapter::class.java, adapter)
         assertEquals(TestResponseClass::class.java, adapter?.responseType())
@@ -39,12 +39,12 @@ class NetworkResultAdapterFactoryTest {
     fun `should throw error if the type is not parameterized`() {
         assertThrows(
             IllegalStateException::class.java,
-        ) { NetworkResultCallAdapterFactory().get(NetworkResult::class.java, arrayOf(), retrofit) }
+        ) { NetworkResultCallAdapterFactory.create().get(NetworkResult::class.java, arrayOf(), retrofit) }
     }
 
     @Test
     fun `should return null if the type is not supported`() {
-        val adapter = NetworkResultCallAdapterFactory().get(TestResponseClass::class.java, arrayOf(), retrofit)
+        val adapter = NetworkResultCallAdapterFactory.create().get(TestResponseClass::class.java, arrayOf(), retrofit)
 
         assertNull(adapter)
     }
