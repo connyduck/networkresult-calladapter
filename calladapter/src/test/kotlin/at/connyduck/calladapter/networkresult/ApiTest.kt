@@ -3,10 +3,10 @@ package at.connyduck.calladapter.networkresult
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.runBlocking
+import mockwebserver3.MockResponse
+import mockwebserver3.MockWebServer
+import mockwebserver3.SocketEffect
 import okhttp3.OkHttpClient
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
-import okhttp3.mockwebserver.SocketPolicy
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import java.io.IOException
 
 class ApiTest {
@@ -37,32 +38,25 @@ class ApiTest {
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .client(OkHttpClient())
                 .build()
-                .create(TestApi::class.java)
+                .create()
     }
 
     @AfterEach
     fun shutdown() {
-        mockWebServer.shutdown()
+        mockWebServer.close()
     }
-
-    private fun mockResponse(
-        responseCode: Int,
-        body: String = "",
-    ) = MockResponse()
-        .setResponseCode(responseCode)
-        .setBody(body)
 
     @Test
     fun `suspending call - should return the correct test object`() {
         val response =
-            mockResponse(
-                200,
-                """
-                {
-                    "lets": "not",
-                    "test": 1
-                }
-            """,
+            MockResponse(
+                code = 200,
+                body = """
+                        {
+                            "lets": "not",
+                            "test": 1
+                        }
+                    """,
             )
 
         mockWebServer.enqueue(response)
@@ -81,14 +75,14 @@ class ApiTest {
     @Test
     fun `blocking call - should return the correct test object`() {
         val response =
-            mockResponse(
-                200,
-                """
-                {
-                    "lets": "not",
-                    "test": 1
-                }
-            """,
+            MockResponse(
+                code = 200,
+                body = """
+                        {
+                            "lets": "not",
+                            "test": 1
+                        }
+                    """,
             )
 
         mockWebServer.enqueue(response)
@@ -104,7 +98,10 @@ class ApiTest {
     @Test
     fun `suspending call - should return a ApiError failure when the server returns error 500`() {
         val errorCode = 500
-        val response = mockResponse(errorCode)
+        val response =
+            MockResponse(
+                code = errorCode,
+            )
 
         mockWebServer.enqueue(response)
 
@@ -120,7 +117,10 @@ class ApiTest {
     @Test
     fun `blocking call - should return a ApiError failure when the server returns error 500`() {
         val errorCode = 500
-        val response = mockResponse(errorCode)
+        val response =
+            MockResponse(
+                code = errorCode,
+            )
 
         mockWebServer.enqueue(response)
 
@@ -132,7 +132,13 @@ class ApiTest {
 
     @Test
     fun `suspending call - should return a NetworkError failure when the network fails`() {
-        mockWebServer.enqueue(MockResponse().apply { socketPolicy = SocketPolicy.DISCONNECT_AFTER_REQUEST })
+        val response =
+            MockResponse.Builder()
+                .onResponseStart(
+                    SocketEffect.CloseSocket(),
+                ).build()
+        mockWebServer.enqueue(response)
+
         val responseObject =
             runBlocking {
                 api.testEndpointAsync()
@@ -152,7 +158,13 @@ class ApiTest {
 
     @Test
     fun `blocking call - should return a NetworkError failure when the network fails`() {
-        mockWebServer.enqueue(MockResponse().apply { socketPolicy = SocketPolicy.DISCONNECT_AFTER_REQUEST })
+        val response =
+            MockResponse.Builder()
+                .onResponseStart(
+                    SocketEffect.CloseSocket(),
+                ).build()
+        mockWebServer.enqueue(response)
+
         val responseObject = api.testEndpointSync()
 
         assertEquals(

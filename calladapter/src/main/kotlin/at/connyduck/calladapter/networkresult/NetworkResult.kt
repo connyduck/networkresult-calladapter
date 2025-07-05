@@ -1,7 +1,6 @@
 /**
- * Non-inline version of kotlin.Result
+ * Non-inline version of [kotlin.Result]
  * inline classes don't work well in combination with Retrofit
- *
  */
 
 @file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
