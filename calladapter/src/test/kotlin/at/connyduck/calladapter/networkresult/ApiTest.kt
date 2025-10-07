@@ -26,19 +26,17 @@ class ApiTest {
     fun setup() {
         mockWebServer.start()
 
-        val moshi =
-            Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
-                .build()
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
-        api =
-            Retrofit.Builder()
-                .baseUrl(mockWebServer.url("/"))
-                .addCallAdapterFactory(NetworkResultCallAdapterFactory.create())
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .client(OkHttpClient())
-                .build()
-                .create()
+        api = Retrofit.Builder()
+            .baseUrl(mockWebServer.url("/"))
+            .addCallAdapterFactory(NetworkResultCallAdapterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .client(OkHttpClient())
+            .build()
+            .create()
     }
 
     @AfterEach

@@ -1,0 +1,13 @@
+root = true
+
+[*.kt]
+
+# Disable trailing comma
+ktlint_standard_trailing-comma-on-call-site = disabled
+ktlint_standard_trailing-comma-on-declaration-site = disabled
+
+# It is fine when a function body is just a return statement
+ktlint_standard_function-expression-body = disabled
+
+ktlint_standard_multiline-expression-wrapping = disabled
+ktlint_standard_chain-method-continuation = disabled
