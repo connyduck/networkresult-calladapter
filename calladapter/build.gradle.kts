@@ -78,7 +78,7 @@ tasks.test {
 }
 
 dependencies {
-    val okHttpVersion = "5.0.0"
+    val okHttpVersion = "5.2.0"
     val retrofitVersion = "3.0.0"
     val jUnitVersion = "5.13.3"
     val moshiVersion = "1.15.2"
