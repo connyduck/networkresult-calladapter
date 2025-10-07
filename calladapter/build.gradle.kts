@@ -80,7 +80,7 @@ tasks.test {
 dependencies {
     val okHttpVersion = "5.2.0"
     val retrofitVersion = "3.0.0"
-    val jUnitVersion = "5.13.3"
+    val jUnitVersion = "6.0.0"
     val moshiVersion = "1.15.2"
 
     api(kotlin("stdlib"))
@@ -95,7 +95,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.13.3")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.0")
 
     testImplementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
     testImplementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
