@@ -6,7 +6,7 @@ buildscript {
         classpath(kotlin("gradle-plugin", version = "2.2.20"))
         classpath("org.jlleitschuh.gradle:ktlint-gradle:13.1.0")
         classpath("io.github.gradle-nexus:publish-plugin:2.0.0")
-        classpath("org.jetbrains.dokka:dokka-gradle-plugin:2.0.0")
+        classpath("org.jetbrains.dokka:dokka-gradle-plugin:2.1.0")
         classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.18.1")
     }
 }
